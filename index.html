@@ -771,22 +771,23 @@
 	<script src="js/jquery.countTo.js"></script>
 	
 	
-	<!-- MAIN JS -->
-	<script src="js/main.js"></script>
-		<div class="counter-box">
+	<div class="counter-box">
     <h3>Total Visitors: <span id="visitor-count">Loading...</span></h3>
 </div>
 
 <script>
-   fetch('https://api.countapi.xyz/update/pratikfulzele.github.io/visits/?amount=1')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('visitor-count').innerText = data.value;
-    })
-    .catch(error => {
-        document.getElementById('visitor-count').innerText = "Error!";
-        console.error("Error fetching visitor count:", error);
-    });
+    async function updateVisitorCount() {
+        try {
+            let response = await fetch('https://api.countapi.xyz/update/pratikfulzele.github.io/visits/?amount=1');
+            let data = await response.json();
+            document.getElementById('visitor-count').innerText = data.value;
+        } catch (error) {
+            document.getElementById('visitor-count').innerText = "Error!";
+            console.error("Error fetching visitor count:", error);
+        }
+    }
+
+    updateVisitorCount();
 </script>
 
 <style>
@@ -811,6 +812,7 @@
         color: #007bff;
     }
 </style>
+
 
 
 	</body>
